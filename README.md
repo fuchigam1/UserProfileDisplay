@@ -1,6 +1,7 @@
 # ユーザープロフィールディスプレイ プラグイン
 ユーザープロフィールディスプレイ プラグインは、ユーザー別にプロフィール情報を設定できるbaserCMS専用のプラグインです。
 
+- [Summary: Wiki](https://github.com/materializing/UserProfileDisplay)
 
 ## Installation
 1. 圧縮ファイルを解凍後、BASERCMS/app/Plugin/UserProfileDisplay に配置します。
