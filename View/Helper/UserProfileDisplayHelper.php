@@ -134,8 +134,8 @@ class UserProfileDisplayHelper extends AppHelper {
  */
 	public function getShowImage($post = array(), $options = array()) {
 		$_options = array(
-			'width' => '100',
-			'alt' => '',
+			'width' => $post['UserProfileDisplay']['gravatar_size'],
+			'alt' => $this->getShowName($post),
 			'link' => false,
 			'noimage' => '',
 			'imgsize' => 'small',
@@ -154,9 +154,12 @@ class UserProfileDisplayHelper extends AppHelper {
 				// Gravatar
 				$image = $this->get_gravatar($post['UserProfileDisplay']['gravatar_email'],
 					array(
-						'size' => $post['UserProfileDisplay']['gravatar_size'],
+						'width' => $options['width'],
 						'rating' => $post['UserProfileDisplay']['gravatar_rating'],
-						'img' => true
+						'img' => true,
+					), 
+					array(
+						'alt' => $options['alt'],
 					)
 				);
 				break;
@@ -182,7 +185,7 @@ class UserProfileDisplayHelper extends AppHelper {
  */
 	function get_gravatar( $email, $options = array(), $attr = array() ) {
 		$_options = array(
-			'size' => 80,
+			'width' => 80,
 			'avatar' => 'mm',
 			'rating' => 'g',
 			'img' => false,
@@ -192,7 +195,7 @@ class UserProfileDisplayHelper extends AppHelper {
 		$url = 'http://www.gravatar.com/avatar/';
 		$url .= md5( strtolower( trim( $email ) ) );
 		//$url .= "?s=$s&d=$d&r=$r";
-		$url .= '?s='. $options['size'] .'&d='. $options['avatar'] .'&r='. $options['rating'];
+		$url .= '?s='. $options['width'] .'&d='. $options['avatar'] .'&r='. $options['rating'];
 		
 		$result = $this->curlRequest($url);
 		$content = $result['content'];
