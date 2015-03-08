@@ -12,13 +12,12 @@
  * 
  * 
  */
-debug($post['UserProfileDisplay']);
 ?>
 <?php if (!empty($post['UserProfileDisplay'])): ?>
 	<?php if ($this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')): ?>
 <div id="UserProfileDisplayBlock" class="cleafix">
 	<div class="profile-box">
-		<h3>著者プロフィール</h3>
+		<h3>この記事を書いたひと</h3>
 		<div class="profile-img">
 			<?php echo $this->UserProfileDisplay->getShowImage($post) ?>
 		</div>
@@ -41,10 +40,10 @@ debug($post['UserProfileDisplay']);
 				<li>Twitter: <?php $this->BcBaser->link($post['UserProfileDisplay']['twitter'], $post['UserProfileDisplay']['twitter']) ?></li>
 				<?php endif ?>
 				<?php if ($post['UserProfileDisplay']['facebook']): ?>
-				<li>Twitter: <?php $this->BcBaser->link($post['UserProfileDisplay']['facebook'], $post['UserProfileDisplay']['facebook']) ?></li>
+				<li>facebook: <?php $this->BcBaser->link($post['UserProfileDisplay']['facebook'], $post['UserProfileDisplay']['facebook']) ?></li>
 				<?php endif ?>
 				<?php if ($post['UserProfileDisplay']['google']): ?>
-				<li>Twitter: <?php $this->BcBaser->link($post['UserProfileDisplay']['google'], $post['UserProfileDisplay']['google']) ?></li>
+				<li>Google＋: <?php $this->BcBaser->link($post['UserProfileDisplay']['google'], $post['UserProfileDisplay']['google']) ?></li>
 				<?php endif ?>
 			</ul>
 		</div>
@@ -54,9 +53,19 @@ debug($post['UserProfileDisplay']);
 		</div>
 		<?php endif ?>
 		<?php if ($post['UserProfileDisplay']['show_blog_post']): ?>
-		<div class="profile-blog-post">
-		
-		</div>
+			<?php $userBlogPosts = $this->UserProfileDisplay->getBlogPosts($post) ?>
+			<div class="profile-blog-post">
+				<h5>このひとの最新記事</h5>
+				<ul>
+			<?php if ($userBlogPosts): ?>
+				<?php foreach ($userBlogPosts as $value): ?>
+					<li><?php echo $this->Blog->getPostTitle($value) ?></li>
+				<?php endforeach ?>
+			<?php else: ?>
+					<li>記事がありません。</li>
+				</ul>
+			<?php endif ?>
+			</div>
 		<?php endif ?>
 	</div>
 </div>

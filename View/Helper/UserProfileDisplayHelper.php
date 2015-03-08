@@ -98,8 +98,31 @@ class UserProfileDisplayHelper extends AppHelper {
 		return $name;
 	}
 	
-	public function getBlogPost() {
+	public function getBlogPosts($post, $options = array()) {
+		if (ClassRegistry::isKeySet('Blog.BlogPost')) {
+			$BlogPostModel = ClassRegistry::getObject('Blog.BlogPost');
+		} else {
+			$BlogPostModel = ClassRegistry::init('Blog.BlogPost');
+		}
 		
+		$_options = array(
+			'user_id' => $post['BlogPost']['user_id'],
+			'blog_content_id' => $post['BlogPost']['blog_content_id'],
+			'limit' => $post['UserProfileDisplay']['show_post_num'],
+		);
+		$options = Hash::merge($_options, $options);
+		
+		$posts = $BlogPostModel->getPublishes(array(
+			'limit'		=> $options['limit'],
+			'order'		=> 'BlogPost.posts_date DESC',
+			'conditions'=> array(
+				'BlogPost.blog_content_id' => $options['blog_content_id'],
+				'BlogPost.user_id' => $options['user_id'],
+			),
+			'recursive' => 0,
+		));
+		
+		return $posts;
 	}
 	
 /**
