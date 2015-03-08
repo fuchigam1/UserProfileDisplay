@@ -15,28 +15,6 @@ class UserProfileDisplayHelper extends AppHelper {
 	public $helpers = array( 'BcBaser', 'BcHtml', 'BcUpload');
 	
 /**
- * 有効になっているか判定する
- * 
- * @param array $data
- * @return boolean
- */	
-	public function judgeStatus($data = array()) {
-		if ($data) {
-			if (isset($data['UserProfileDisplay'])) {
-				if ($data['UserProfileDisplay']['status']) {
-					return true;
-				}
-			} else {
-				$key = key($data);
-				if ($data[$key]['status']) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-/**
  * 有効状態を判定する
  * 
  * @param array $data
@@ -98,6 +76,13 @@ class UserProfileDisplayHelper extends AppHelper {
 		return $name;
 	}
 	
+/**
+ * 記事の作成者の最新記事を取得する
+ * 
+ * @param array $post
+ * @param array $options
+ * @return array
+ */
 	public function getBlogPosts($post, $options = array()) {
 		if (ClassRegistry::isKeySet('Blog.BlogPost')) {
 			$BlogPostModel = ClassRegistry::getObject('Blog.BlogPost');
@@ -109,6 +94,7 @@ class UserProfileDisplayHelper extends AppHelper {
 			'user_id' => $post['BlogPost']['user_id'],
 			'blog_content_id' => $post['BlogPost']['blog_content_id'],
 			'limit' => $post['UserProfileDisplay']['show_post_num'],
+			'recursive' => 0,
 		);
 		$options = Hash::merge($_options, $options);
 		
@@ -119,7 +105,7 @@ class UserProfileDisplayHelper extends AppHelper {
 				'BlogPost.blog_content_id' => $options['blog_content_id'],
 				'BlogPost.user_id' => $options['user_id'],
 			),
-			'recursive' => 0,
+			'recursive' => $options['recursive'],
 		));
 		
 		return $posts;

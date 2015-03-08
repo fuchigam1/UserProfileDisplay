@@ -17,13 +17,13 @@
 ### Uses Theme
 - 以下のファイルをテーマ側にコピーします。
   - /Plugin/UserProfileDisplay/View/Elements/user_profile_display_block.php
-- ブログの記事詳細用のビュー（）に、以下の内容を記載することで表示できます。
+- ブログの記事詳細用のビュー（/theme/THEME/Blog/default/single.php）に、以下の内容を記載することで表示できます。
 
 ```
 <?php $this->BcBaser->element('user_profile_display_block') ?>
 ```
 
- 
+
 ## Thanks
 - [http://basercms.net/](http://basercms.net/)
 - [http://wiki.basercms.net/](http://wiki.basercms.net/)
