@@ -246,4 +246,53 @@ class UserProfileDisplayHelper extends AppHelper {
 		return array('info' => $info, 'content' => $output);
 	}
 	
+/**
+ * テキストエリアの1行目の文字列を取得する
+ * 
+ * @param string $str
+ * @return string
+ */
+	public function getLinkTitle($str = '') {
+		$array = $this->textToArray($str);
+		if (!empty($array[0])) {
+			return $array[0];
+		}
+		return '';
+	}
+	
+/**
+ * テキストエリアの2行目の文字列を取得する
+ * 
+ * @param string $str
+ * @return string
+ */
+	public function getLinkUrl($str = '') {
+		$array = $this->textToArray($str);
+		if (!empty($array[1])) {
+			return $array[1];
+		}
+		return '';
+	}
+	
+/**
+ * テキスト情報を配列形式に変換して返す
+ * - 改行で分割する
+ * 
+ * @param string $str
+ * @return mixed
+ */
+	public function textToArray($str = '') {
+		// "CR + LF: \r\n｜CR: \r｜LF: \n"
+		$code = array('\r\n', '\r');
+		// 文頭文末の空白を削除する
+		$str = trim($str);
+		// 改行コードを統一する（改行コードを変換する際はダブルクォーテーションで指定する）
+		//$str = str_replace($code, '\n', $str);
+		$str = preg_replace('/\r\n|\r|\n/', "\n", $str);
+		// 分割（結果は配列に入る）
+		$str = preg_split('/[\s,]+/', $str);
+		//$str = explode('\n', $str);
+		return $str;
+	}
+	
 }

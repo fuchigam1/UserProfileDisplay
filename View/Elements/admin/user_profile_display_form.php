@@ -180,11 +180,11 @@ $(function () {
 				</th>
 				<td class="col-input" colspan="3">
 					<?php echo $this->BcForm->input('UserProfileDisplay.website', array(
-						'type' => 'text', 'size' => 68, 'maxlength' => 255, 'counter' => true,
+						'type' => 'textarea', 'rows' => 2,
 						'placeholder' => 'ご自身でお持ちのウェブサイトURLを入力してください。', 'style' => 'width: 85%'
 					)) ?>
 					<?php echo $this->BcForm->error('UserProfileDisplay.website') ?>
-					<br /><small>未入力時は表示されません。</small>
+					<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
 				</td>
 			</tr>
 			<tr>
@@ -193,11 +193,11 @@ $(function () {
 				</th>
 				<td class="col-input" colspan="3">
 					<?php echo $this->BcForm->input('UserProfileDisplay.website2', array(
-						'type' => 'text', 'size' => 68, 'maxlength' => 255, 'counter' => true,
+						'type' => 'textarea', 'rows' => 2,
 						'style' => 'width: 85%'
 					)) ?>
 					<?php echo $this->BcForm->error('UserProfileDisplay.website2') ?>
-					<br /><small>未入力時は表示されません。</small>
+					<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
 				</td>
 			</tr>
 			<tr>
@@ -206,11 +206,11 @@ $(function () {
 				</th>
 				<td class="col-input" colspan="3">
 					<?php echo $this->BcForm->input('UserProfileDisplay.twitter', array(
-						'type' => 'text', 'size' => 68, 'maxlength' => 255, 'counter' => true,
+						'type' => 'textarea', 'rows' => 2,
 						'placeholder' => 'https://twitter.com/YOUR_ACCOUNT', 'style' => 'width: 85%'
 					)) ?>
 					<?php echo $this->BcForm->error('UserProfileDisplay.twitter') ?>
-					<br /><small>未入力時は表示されません。</small>
+					<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
 				</td>
 			</tr>
 			<tr>
@@ -219,11 +219,11 @@ $(function () {
 				</th>
 				<td class="col-input" colspan="3">
 					<?php echo $this->BcForm->input('UserProfileDisplay.facebook', array(
-						'type' => 'text', 'size' => 68, 'maxlength' => 255, 'counter' => true,
+						'type' => 'textarea', 'rows' => 2,
 						'placeholder' => 'https://www.facebook.com/YOUR_FACEBOOK_PAGE', 'style' => 'width: 85%'
 					)) ?>
 					<?php echo $this->BcForm->error('UserProfileDisplay.facebook') ?>
-					<br /><small>未入力時は表示されません。</small>
+					<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
 				</td>
 			</tr>
 			<tr>
@@ -232,11 +232,11 @@ $(function () {
 				</th>
 				<td class="col-input" colspan="3">
 					<?php echo $this->BcForm->input('UserProfileDisplay.google', array(
-						'type' => 'text', 'size' => 68, 'maxlength' => 255, 'counter' => true,
+						'type' => 'textarea', 'rows' => 2,
 						'placeholder' => 'https://plus.google.com/YOUR_URL', 'style' => 'width: 85%'
 					)) ?>
 					<?php echo $this->BcForm->error('UserProfileDisplay.google') ?>
-					<br /><small>未入力時は表示されません。</small>
+					<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
 				</td>
 			</tr>
 			<tr>

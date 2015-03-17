@@ -25,23 +25,55 @@
 			<?php if ($post['UserProfileDisplay']['belong']): ?>
 			<p><?php echo h($post['UserProfileDisplay']['belong']) ?></p>
 			<?php endif ?>
+			
 			<?php if ($post['UserProfileDisplay']['title']): ?>
 			<p><?php echo h($post['UserProfileDisplay']['title']) ?></p>
 			<?php endif ?>
-			<ul><?php if ($post['UserProfileDisplay']['website']): ?>
-				<li>URL: <?php $this->BcBaser->link($post['UserProfileDisplay']['website'], $post['UserProfileDisplay']['website']) ?></li>
+			
+			<ul>
+				<?php if ($post['UserProfileDisplay']['website']): ?>
+				<li>URL: 
+					<?php $this->BcBaser->link(
+						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['website']),
+						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['website'])
+					) ?>
+				</li>
 				<?php endif ?>
+				
 				<?php if ($post['UserProfileDisplay']['website2']): ?>
-				<li>URL: <?php $this->BcBaser->link($post['UserProfileDisplay']['website2'], $post['UserProfileDisplay']['website2']) ?></li>
+				<li>URL2: 
+					<?php $this->BcBaser->link(
+						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['website2']),
+						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['website2'])
+					) ?>
+				</li>
 				<?php endif ?>
+				
 				<?php if ($post['UserProfileDisplay']['twitter']): ?>
-				<li>Twitter: <?php $this->BcBaser->link($post['UserProfileDisplay']['twitter'], $post['UserProfileDisplay']['twitter']) ?></li>
+				<li>Twitter: 
+					<?php $this->BcBaser->link(
+						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['twitter']),
+						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['twitter'])
+					) ?>
+				</li>
 				<?php endif ?>
+				
 				<?php if ($post['UserProfileDisplay']['facebook']): ?>
-				<li>facebook: <?php $this->BcBaser->link($post['UserProfileDisplay']['facebook'], $post['UserProfileDisplay']['facebook']) ?></li>
+				<li>facebook: 
+					<?php $this->BcBaser->link(
+						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['facebook']),
+						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['facebook'])
+					) ?>
+				</li>
 				<?php endif ?>
+				
 				<?php if ($post['UserProfileDisplay']['google']): ?>
-				<li>Google＋: <?php $this->BcBaser->link($post['UserProfileDisplay']['google'], $post['UserProfileDisplay']['google']) ?></li>
+				<li>Google＋: 
+					<?php $this->BcBaser->link(
+						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['google']),
+						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['google'])
+					) ?>
+				</li>
 				<?php endif ?>
 			</ul>
 		</div>
@@ -50,6 +82,7 @@
 			<?php echo $post['UserProfileDisplay']['description'] ?>
 		</div>
 		<?php endif ?>
+		
 		<?php if ($post['UserProfileDisplay']['show_blog_post']): ?>
 			<?php $userBlogPosts = $this->UserProfileDisplay->getBlogPosts($post) ?>
 			<div class="profile-blog-post">
