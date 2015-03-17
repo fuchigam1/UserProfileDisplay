@@ -95,9 +95,10 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
 			$saveData['UserProfileDisplay']['user_id'] = $Model->getLastInsertId();
 		} else {
 			$saveData['UserProfileDisplay'] = $Model->data['UserProfileDisplay'];
+			$saveData['UserProfileDisplay']['user_id'] = $Model->data['User']['id'];
 		}
 		
-		if (isset($saveData['UserProfileDisplay']['id'])) {
+		if (!empty($saveData['UserProfileDisplay']['id'])) {
 			$Model->UserProfileDisplay->set($saveData);
 		} else {
 			$Model->UserProfileDisplay->create($saveData);
