@@ -104,6 +104,9 @@ class UserProfileDisplayHelper extends AppHelper {
 			'conditions'=> array(
 				'BlogPost.blog_content_id' => $options['blog_content_id'],
 				'BlogPost.user_id' => $options['user_id'],
+				'NOT' => array(
+					'BlogPost.id' => $post['BlogPost']['id'],
+				),
 			),
 			'recursive' => $options['recursive'],
 		));
