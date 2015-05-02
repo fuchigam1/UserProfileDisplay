@@ -27,6 +27,7 @@ class UserProfileDisplay extends BcPluginAppModel {
  * @var array
  */
 	public $actsAs = array(
+		'BcCache',
 		'BcUpload' => array(
 			'saveDir' => 'user_profile_display',
 			'fields' => array(
