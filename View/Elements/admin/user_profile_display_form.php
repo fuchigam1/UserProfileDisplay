@@ -246,4 +246,3 @@ $(function () {
 			<?php echo $this->BcForm->error('UserProfileDisplay.description') ?>
 		</td>
 	</tr>
-</table>
