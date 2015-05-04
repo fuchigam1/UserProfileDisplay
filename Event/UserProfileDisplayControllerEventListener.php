@@ -35,15 +35,16 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
  * @param CakeEvent $event
  */
 	public function usersBeforeRender (CakeEvent $event) {
+		if (!BcUtil::isAdminSystem()) {
+			return;
+		}
+		
 		$Controller = $event->subject();
-		if (BcUtil::isAdminSystem()) {
-			if ($Controller->request->params['action'] == 'admin_add') {
-				$Controller->request->data['UserProfileDisplay'] = array(
-					'status' => true,
-					'show_post_num' => '5',
-					'gravatar_rating' => '0',
-				);
-			}
+		if ($Controller->request->params['action'] == 'admin_add') {
+			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
+			$UserProfileDisplayModel = new UserProfileDisplay();
+			$default = $UserProfileDisplayModel->getDefaultValue();
+			$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
 		}
 	}
 	

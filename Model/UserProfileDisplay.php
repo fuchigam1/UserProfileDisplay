@@ -22,7 +22,7 @@ class UserProfileDisplay extends BcPluginAppModel {
 	public $plugin = 'UserProfileDisplay';
 	
 /**
- * ビヘイビア
+ * Behavior
  * 
  * @var array
  */
@@ -58,5 +58,22 @@ class UserProfileDisplay extends BcPluginAppModel {
 			'foreignKey' => 'user_id'
 		),
 	);
+	
+/**
+ * 初期値を取得する
+ *
+ * @return array
+ */
+	public function getDefaultValue() {
+		$data = array(
+			$this->name => array(
+				'status' => true,
+				'show_blog_post' => true,
+				'show_post_num' => '5',
+				'gravatar_rating' => '0',
+			)
+		);
+		return $data;
+	}
 	
 }
