@@ -87,23 +87,9 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
  */
 	public function userAfterSave (CakeEvent $event) {
 		$Model = $event->subject();
-		$created = $event->data[0];
-		$saveData = array();
-		
-		if ($created) {
-			$saveData['UserProfileDisplay'] = $Model->data['UserProfileDisplay'];
-			$saveData['UserProfileDisplay']['user_id'] = $Model->getLastInsertId();
-		} else {
-			$saveData['UserProfileDisplay'] = $Model->data['UserProfileDisplay'];
-			$saveData['UserProfileDisplay']['user_id'] = $Model->data['User']['id'];
-		}
-		
-		if (!empty($saveData['UserProfileDisplay']['id'])) {
-			$Model->UserProfileDisplay->set($saveData);
-		} else {
-			$Model->UserProfileDisplay->create($saveData);
-		}
-		if (!$Model->UserProfileDisplay->save()) {
+		$saveData['UserProfileDisplay'] = $Model->data['UserProfileDisplay'];
+		$saveData['UserProfileDisplay']['user_id'] = $Model->id;
+		if (!$Model->UserProfileDisplay->save($saveData)) {
 			$this->log(sprintf('ID：%s のUserProfileDisplayの保存に失敗しました。', $Model->data['UserProfileDisplay']['id']));
 		} else {
 			$Model->UserProfileDisplay->saveDblog('ユーザーID: ' . $saveData['UserProfileDisplay']['user_id'] . ' がプロフィールを編集しました。');
