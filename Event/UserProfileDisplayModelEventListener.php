@@ -24,7 +24,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
  * 
  * @return void
  */
-	public function setup() {
+	public function setupModel() {
 		if (ClassRegistry::isKeySet('UserProfileDisplay.UserProfileDisplay')) {
 			$this->UserProfileDisplayModel = ClassRegistry::getObject('UserProfileDisplay.UserProfileDisplay');
 		} else {
@@ -37,25 +37,26 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
  * ブログ記事取得時に、記事作成者のユーザープロフィールディスプレイデータを取得する
  * 
  * @param CakeEvent $event
- * @return array
  */
 	function blogBlogPostAfterFind (CakeEvent $event) {
 		//$Model = $event->subject();
-		if (!BcUtil::isAdminSystem()) {
-			if (!empty($event->data[0])) {
-				$this->setup();
-				foreach ($event->data[0] as $key => $value) {
-					// 記事作成者のユーザープロフィールディスプレイデータを取得
-					if (!empty($value['BlogPost']['user_id'])) {
-						$data = $this->UserProfileDisplayModel->find('first', array(
-							'conditions' => array(
-								'UserProfileDisplay.user_id' => $value['BlogPost']['user_id'],
-							),
-							'recursive' => -1,
-						));
-						if ($data) {
-							$event->data[0][$key]['UserProfileDisplay'] = $data['UserProfileDisplay'];
-						}
+		if (BcUtil::isAdminSystem()) {
+			return;
+		}
+		
+		if (!empty($event->data[0])) {
+			$this->setupModel();
+			foreach ($event->data[0] as $key => $value) {
+				// 記事作成者のユーザープロフィールディスプレイデータを取得
+				if (!empty($value['BlogPost']['user_id'])) {
+					$data = $this->UserProfileDisplayModel->find('first', array(
+						'conditions' => array(
+							'UserProfileDisplay.user_id' => $value['BlogPost']['user_id'],
+						),
+						'recursive' => -1,
+					));
+					if ($data) {
+						$event->data[0][$key]['UserProfileDisplay'] = $data['UserProfileDisplay'];
 					}
 				}
 			}
