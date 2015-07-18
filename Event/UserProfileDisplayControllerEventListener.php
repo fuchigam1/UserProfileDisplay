@@ -40,6 +40,17 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
 		}
 		
 		$Controller = $event->subject();
+		
+		if ($Controller->request->params['action'] == 'admin_edit') {
+			if (isset($Controller->request->data['UserProfileDisplay']) && empty($Controller->request->data['UserProfileDisplay'])) {
+				App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
+				$UserProfileDisplayModel = new UserProfileDisplay();
+				$default = $UserProfileDisplayModel->getDefaultValue();
+				$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
+			}
+			return;
+		}
+		
 		if ($Controller->request->params['action'] == 'admin_add') {
 			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
 			$UserProfileDisplayModel = new UserProfileDisplay();
