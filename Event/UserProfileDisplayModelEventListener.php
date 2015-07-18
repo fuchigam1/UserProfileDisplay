@@ -24,7 +24,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
  * 
  * @return void
  */
-	public function setupModel() {
+	private function setupModel() {
 		if (ClassRegistry::isKeySet('UserProfileDisplay.UserProfileDisplay')) {
 			$this->UserProfileDisplayModel = ClassRegistry::getObject('UserProfileDisplay.UserProfileDisplay');
 		} else {
@@ -88,6 +88,11 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
  */
 	public function userAfterSave (CakeEvent $event) {
 		$Model = $event->subject();
+		
+		if (!isset($Model->data['UserProfileDisplay']) || empty($Model->data['UserProfileDisplay'])) {
+			return;
+		}
+		
 		$saveData['UserProfileDisplay'] = $Model->data['UserProfileDisplay'];
 		$saveData['UserProfileDisplay']['user_id'] = $Model->id;
 		if (!$Model->UserProfileDisplay->save($saveData)) {
