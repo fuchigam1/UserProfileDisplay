@@ -22,20 +22,14 @@ class UserProfileDisplayHelperEventListener extends BcHelperEventListener {
  * 
  * @var array
  */
-	public $targetAction = array(
-		'admin_edit',
-		'admin_add',
-	);
+	private $targetAction = array('admin_edit', 'admin_add');
 	
 /**
  * 処理対象フォームID
  * 
  * @var array
  */
-	public $targetFormId = array(
-		'UserAdminEditForm',
-		'UserAdminAddForm',
-	);
+	private $targetFormId = array('UserAdminEditForm', 'UserAdminAddForm');
 	
 /**
  * formBeforeCreate
@@ -53,10 +47,12 @@ class UserProfileDisplayHelperEventListener extends BcHelperEventListener {
 			return;
 		}
 		
-		if (in_array($View->request->params['action'], $this->targetAction)) {
-			if (in_array($event->data['id'], $this->targetFormId)) {
-				$event->data['options'] = Hash::merge($event->data['options'], array('enctype' => 'multipart/form-data'));
-			}
+		if (!in_array($View->request->params['action'], $this->targetAction)) {
+			return;
+		}
+		
+		if (in_array($event->data['id'], $this->targetFormId)) {
+			$event->data['options'] = Hash::merge($event->data['options'], array('enctype' => 'multipart/form-data'));
 		}
 	}
 	
@@ -76,10 +72,12 @@ class UserProfileDisplayHelperEventListener extends BcHelperEventListener {
 			return;
 		}
 		
-		if (in_array($View->request->params['action'], $this->targetAction)) {
-			if (in_array($event->data['id'], $this->targetFormId)) {
-				echo $View->element('UserProfileDisplay.admin/user_profile_display_form');
-			}
+		if (!in_array($View->request->params['action'], $this->targetAction)) {
+			return;
+		}
+		
+		if (in_array($event->data['id'], $this->targetFormId)) {
+			echo $View->element('UserProfileDisplay.admin/user_profile_display_form');
 		}
 	}
 	
