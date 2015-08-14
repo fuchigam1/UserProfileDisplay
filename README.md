@@ -30,3 +30,4 @@
 - [http://wiki.basercms.net/](http://wiki.basercms.net/)
 - [http://cakephp.jp](http://cakephp.jp)
 - [https://ja.gravatar.com/](https://ja.gravatar.com/)
+- [Semantic Versioning 2.0.0](http://semver.org/lang/ja/)
