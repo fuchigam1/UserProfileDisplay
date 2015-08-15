@@ -18,6 +18,13 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
 	);
 	
 /**
+ * 処理対象とするアクション
+ * 
+ * @var array
+ */
+	private $targetAction = array('admin_edit', 'admin_add');
+	
+/**
  * initialize
  * UserProfileDisplayヘルパーを追加する
  * 
@@ -40,18 +47,19 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
 		}
 		
 		$Controller = $event->subject();
-		
-		if ($Controller->request->params['action'] == 'admin_edit') {
-			if (isset($Controller->request->data['UserProfileDisplay']) && empty($Controller->request->data['UserProfileDisplay'])) {
-				App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
-				$UserProfileDisplayModel = new UserProfileDisplay();
-				$default = $UserProfileDisplayModel->getDefaultValue();
-				$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
-			}
+		if (!in_array($Controller->request->params['action'], $this->targetAction)) {
 			return;
 		}
 		
 		if ($Controller->request->params['action'] == 'admin_add') {
+			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
+			$UserProfileDisplayModel = new UserProfileDisplay();
+			$default = $UserProfileDisplayModel->getDefaultValue();
+			$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
+			return;
+		}
+		
+		if (isset($Controller->request->data['UserProfileDisplay']) && empty($Controller->request->data['UserProfileDisplay'])) {
 			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
 			$UserProfileDisplayModel = new UserProfileDisplay();
 			$default = $UserProfileDisplayModel->getDefaultValue();
