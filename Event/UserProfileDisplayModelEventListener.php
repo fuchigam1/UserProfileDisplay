@@ -98,7 +98,6 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
 		if (!$Model->UserProfileDisplay->save($saveData)) {
 			$this->log(sprintf('ID：%s のUserProfileDisplayの保存に失敗しました。', $Model->data['UserProfileDisplay']['id']));
 		} else {
-			$Model->UserProfileDisplay->saveDblog('ユーザーID: ' . $saveData['UserProfileDisplay']['user_id'] . ' がプロフィールを編集しました。');
 			clearAllCache();
 		}
 	}
