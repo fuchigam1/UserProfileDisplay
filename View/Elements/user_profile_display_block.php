@@ -10,9 +10,13 @@
  * 記事詳細用や記事一覧表示用のビュー・ファイルに記述することで、
  * ユーザープロフィールディスプレイに入力した内容を反映できます。
  */
+if (empty($post['UserProfileDisplay'])) {
+	return;
+}
+if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
+	return;
+}
 ?>
-<?php if (!empty($post['UserProfileDisplay'])): ?>
-	<?php if ($this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')): ?>
 <div id="UserProfileDisplayBlock" class="cleafix">
 	<div class="profile-box">
 		<h3>この記事を書いたひと</h3>
@@ -100,5 +104,3 @@
 		<?php endif ?>
 	</div>
 </div>
-	<?php endif ?>
-<?php endif ?>
