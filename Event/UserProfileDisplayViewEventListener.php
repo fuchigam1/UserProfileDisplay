@@ -19,7 +19,7 @@ class UserProfileDisplayViewEventListener extends BcViewEventListener
 
 	/**
 	 * afterElement
-	 * - ユーザー一覧画面に、ユーザープロフィールディスプレイ一覧へのリンクを追加する
+	 * - ユーザー一覧画面に、プロフィール表示一覧へのリンクを追加する
 	 * 
 	 * @param CakeEvent $event
 	 */

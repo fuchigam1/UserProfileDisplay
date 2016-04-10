@@ -6,7 +6,7 @@
  * @author			arata
  * @license			MIT
  */
-$title = 'ユーザープロフィールディスプレイ';
+$title = 'プロフィール表示';
 $description = 'ユーザー別に投稿者情報を設定し、公開側の記事に投稿者情報を表示できます。';
 $author = 'arata';
 $url = 'http://www.materializing.net/';

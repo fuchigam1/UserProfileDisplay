@@ -29,7 +29,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 */
 	public $crumbs = array(
 		array('name' => 'プラグイン管理', 'url' => array('plugin' => '', 'controller' => 'plugins', 'action' => 'index')),
-		array('name' => 'ユーザープロフィールディスプレイプラグイン', 'url' => array('plugin' => 'user_profile_display', 'controller' => 'user_profile_displays', 'action' => 'index'))
+		array('name' => 'プロフィール表示プラグイン', 'url' => array('plugin' => 'user_profile_display', 'controller' => 'user_profile_displays', 'action' => 'index'))
 	);
 
 	/**
@@ -37,7 +37,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 *
 	 * @var string
 	 */
-	public $adminTitle = 'ユーザープロフィールディスプレイ';
+	public $adminTitle = 'プロフィール表示';
 
 	/**
 	 * 多対多の処理対象のモデル名

@@ -30,7 +30,7 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 	 *
 	 * @var string
 	 */
-	public $adminTitle = 'ユーザープロフィールディスプレイ';
+	public $adminTitle = 'プロフィール表示';
 
 	/**
 	 * beforeFilter

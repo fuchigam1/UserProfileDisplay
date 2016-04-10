@@ -7,7 +7,7 @@
  * @license			MIT
  */
 /**
- * ユーザープロフィールディスプレイ用設定
+ * プロフィール表示用設定
  * 
  */
 $config['UserProfileDisplay'] = array(

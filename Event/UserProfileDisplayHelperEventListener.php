@@ -60,7 +60,7 @@ class UserProfileDisplayHelperEventListener extends BcHelperEventListener
 
 	/**
 	 * formAfterForm
-	 * ユーザー編集・登録画面にユーザープロフィールディスプレイ指定欄を追加する
+	 * ユーザー編集・登録画面にプロフィール表示指定欄を追加する
 	 * 
 	 * @param CakeEvent $event
 	 */

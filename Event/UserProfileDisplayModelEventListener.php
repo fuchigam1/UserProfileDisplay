@@ -36,7 +36,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 
 	/**
 	 * blogBlogPostAfterFind
-	 * ブログ記事取得時に、記事作成者のユーザープロフィールディスプレイデータを取得する
+	 * ブログ記事取得時に、記事作成者のプロフィール表示データを取得する
 	 * 
 	 * @param CakeEvent $event
 	 */
@@ -53,7 +53,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 
 		$this->setupModel();
 		foreach ($event->data[0] as $key => $value) {
-			// 記事作成者のユーザープロフィールディスプレイデータを取得
+			// 記事作成者のプロフィール表示データを取得
 			if (!empty($value['BlogPost']['user_id'])) {
 				$data = $this->UserProfileDisplayModel->find('first', array(
 					'conditions' => array(
