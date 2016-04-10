@@ -34,7 +34,7 @@ class UserProfileDisplaysSchema extends CakeSchema {
 		'gravatar_email' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'Gravatar用メールアドレス', 'charset' => 'utf8'),
 		'gravatar_rating' => array('type' => 'string', 'null' => true, 'default' => 'g', 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => 'Gravatarレーティング', 'charset' => 'utf8'),
 		'gravatar_size' => array('type' => 'string', 'null' => true, 'default' => '80', 'length' => 20, 'collate' => 'utf8_general_ci', 'comment' => 'Gravatar表示サイズ', 'charset' => 'utf8'),
-		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null, 'comment' => '更新日時'),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null, 'comment' => '作成日時'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null, 'comment' => '作成日時'),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
