@@ -308,4 +308,34 @@ class UserProfileDisplayHelper extends AppHelper
 		return $str;
 	}
 
+	/**
+	 * プロフィール一覧データを取得する
+	 * 
+	 * @return array
+	 */
+	public function getProfileList()
+	{
+		if (ClassRegistry::isKeySet('UserProfileDisplay.UserProfileDisplay')) {
+			$UserProfileDisplayModel = ClassRegistry::getObject('UserProfileDisplay.UserProfileDisplay');
+		} else {
+			$UserProfileDisplayModel = ClassRegistry::init('UserProfileDisplay.UserProfileDisplay');
+		}
+		$dataList = $UserProfileDisplayModel->find('all', array(
+			'conditions' => array(
+				'UserProfileDisplay.status' => true,
+			),
+			'order' => 'position ASC',
+			'callbacks' => false,
+		));
+
+		if ($dataList) {
+			foreach ($dataList as $key => $data) {
+				unset($dataList[$key]['User']['password']);
+				unset($dataList[$key]['User']['email']);
+			}
+		}
+
+		return $dataList;
+	}
+
 }
