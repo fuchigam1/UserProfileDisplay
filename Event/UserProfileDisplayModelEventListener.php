@@ -95,6 +95,17 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener {
 		
 		$saveData['UserProfileDisplay'] = $Model->data['UserProfileDisplay'];
 		$saveData['UserProfileDisplay']['user_id'] = $Model->id;
+
+		$data = $Model->UserProfileDisplay->find('first', array(
+			'conditions' => array('UserProfileDisplay.user_id' => $Model->id),
+			'recursive' => -1,
+			'callbacks' => false,
+		));
+		if (!$data) {
+			$max = $Model->UserProfileDisplay->getMax('position');
+			$data['UserProfileDisplay']['position'] = $max + 1;
+		}
+
 		if (!$Model->UserProfileDisplay->save($saveData)) {
 			$this->log(sprintf('ID：%s のUserProfileDisplayの保存に失敗しました。', $Model->data['UserProfileDisplay']['id']));
 		} else {
