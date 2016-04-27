@@ -194,6 +194,19 @@ $(function () {
 	</tr>
 	<tr>
 		<th class="col-head">
+			<?php echo $this->BcForm->label('UserProfileDisplay.website3', 'URL3') ?>
+		</th>
+		<td class="col-input" colspan="3">
+			<?php echo $this->BcForm->input('UserProfileDisplay.website3', array(
+				'type' => 'textarea', 'rows' => 2,
+				'style' => 'width: 85%'
+			)) ?>
+			<?php echo $this->BcForm->error('UserProfileDisplay.website3') ?>
+			<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
 			<?php echo $this->BcForm->label('UserProfileDisplay.twitter', 'URL: Twitter') ?>
 		</th>
 		<td class="col-input" colspan="3">
@@ -215,6 +228,19 @@ $(function () {
 				'placeholder' => 'https://www.facebook.com/YOUR_FACEBOOK_PAGE', 'style' => 'width: 85%'
 			)) ?>
 			<?php echo $this->BcForm->error('UserProfileDisplay.facebook') ?>
+			<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
+		</td>
+	</tr>
+	<tr>
+		<th class="col-head">
+			<?php echo $this->BcForm->label('UserProfileDisplay.github', 'URL: github') ?>
+		</th>
+		<td class="col-input" colspan="3">
+			<?php echo $this->BcForm->input('UserProfileDisplay.github', array(
+				'type' => 'textarea', 'rows' => 2,
+				'placeholder' => 'https://github.com/YOUR_GITHUB_ACCOUNT', 'style' => 'width: 85%'
+			)) ?>
+			<?php echo $this->BcForm->error('UserProfileDisplay.github') ?>
 			<br /><small>未入力時は表示されません。1行目はリンク用文字列、2行目にURLを入力してください。</small>
 		</td>
 	</tr>
