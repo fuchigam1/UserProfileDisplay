@@ -338,4 +338,22 @@ class UserProfileDisplayHelper extends AppHelper
 		return $dataList;
 	}
 
+	/**
+	 * 作成者名から作成者情報を取得する
+	 * 
+	 * @param string $name
+	 * @return array
+	 */
+	public function getAuthorInfo($name) {
+
+		$UserModel = ClassRegistry::init('User');
+		$userInfo = $UserModel->find('first', array(
+			'conditions' => array(
+				'User.name' => $name,
+			),
+		));
+
+		return $userInfo;
+	}
+
 }
