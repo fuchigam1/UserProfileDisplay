@@ -52,6 +52,15 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 					) ?>
 				</li>
 				<?php endif ?>
+
+				<?php if ($post['UserProfileDisplay']['website3']): ?>
+				<li>URL3: 
+					<?php $this->BcBaser->link(
+						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['website3']),
+						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['website3'])
+					) ?>
+				</li>
+				<?php endif ?>
 				
 				<?php if ($post['UserProfileDisplay']['twitter']): ?>
 				<li>Twitter: 
@@ -67,6 +76,15 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['facebook']),
 						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['facebook'])
+					) ?>
+				</li>
+				<?php endif ?>
+				
+				<?php if ($post['UserProfileDisplay']['github']): ?>
+				<li>github: 
+					<?php $this->BcBaser->link(
+						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['github']),
+						$this->UserProfileDisplay->getLinkUrl($post['UserProfileDisplay']['github'])
 					) ?>
 				</li>
 				<?php endif ?>
