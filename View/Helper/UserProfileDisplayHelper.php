@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Helper] UserProfileDisplay
  *
@@ -8,6 +9,7 @@
  */
 class UserProfileDisplayHelper extends AppHelper
 {
+
 	/**
 	 * ヘルパー
 	 *
@@ -40,10 +42,10 @@ class UserProfileDisplayHelper extends AppHelper
 	 */
 	public function getShowName($post = array(), $options = array())
 	{
-		$_options = array(
+		$_options	 = array(
 			'delimiter' => ' ',
 		);
-		$options = Hash::merge($_options, $options);
+		$options	 = Hash::merge($_options, $options);
 
 		$name = '';
 		// キーと値の参照: Configure::read('UserProfileDisplay.show_name')
@@ -94,25 +96,25 @@ class UserProfileDisplayHelper extends AppHelper
 			$BlogPostModel = ClassRegistry::init('Blog.BlogPost');
 		}
 
-		$_options = array(
-			'user_id' => $post['BlogPost']['user_id'],
-			'blog_content_id' => $post['BlogPost']['blog_content_id'],
-			'limit' => $post['UserProfileDisplay']['show_post_num'],
-			'recursive' => 0,
+		$_options	 = array(
+			'user_id'			 => $post['BlogPost']['user_id'],
+			'blog_content_id'	 => $post['BlogPost']['blog_content_id'],
+			'limit'				 => $post['UserProfileDisplay']['show_post_num'],
+			'recursive'			 => 0,
 		);
-		$options = Hash::merge($_options, $options);
+		$options	 = Hash::merge($_options, $options);
 
 		$posts = $BlogPostModel->getPublishes(array(
-			'limit'		=> $options['limit'],
-			'order'		=> 'BlogPost.posts_date DESC',
-			'conditions'=> array(
-				'BlogPost.blog_content_id' => $options['blog_content_id'],
-				'BlogPost.user_id' => $options['user_id'],
-				'NOT' => array(
+			'limit'		 => $options['limit'],
+			'order'		 => 'BlogPost.posts_date DESC',
+			'conditions' => array(
+				'BlogPost.blog_content_id'	 => $options['blog_content_id'],
+				'BlogPost.user_id'			 => $options['user_id'],
+				'NOT'						 => array(
 					'BlogPost.id' => $post['BlogPost']['id'],
 				),
 			),
-			'recursive' => $options['recursive'],
+			'recursive'	 => $options['recursive'],
 		));
 
 		return $posts;
@@ -128,13 +130,13 @@ class UserProfileDisplayHelper extends AppHelper
 	public function getShowImage($post = array(), $options = array())
 	{
 		$_options	 = array(
-			'width' => $post['UserProfileDisplay']['gravatar_size'],
-			'alt' => $this->getShowName($post),
-			'link' => false,
-			'noimage' => '',
-			'imgsize' => 'small',
+			'width'		 => $post['UserProfileDisplay']['gravatar_size'],
+			'alt'		 => $this->getShowName($post),
+			'link'		 => false,
+			'noimage'	 => '',
+			'imgsize'	 => 'small',
 		);
-		$options = Hash::merge($_options, $options);
+		$options	 = Hash::merge($_options, $options);
 
 		$image = '';
 		// キーと値の参照: Configure::read('UserProfileDisplay.show_image')
@@ -146,15 +148,13 @@ class UserProfileDisplayHelper extends AppHelper
 
 			case '2':
 				// Gravatar
-				$image = $this->get_gravatar($post['UserProfileDisplay']['gravatar_email'],
-					array(
-						'width' => $options['width'],
-						'rating' => $post['UserProfileDisplay']['gravatar_rating'],
-						'img' => true,
-					), 
-					array(
-						'alt' => $options['alt'],
-					)
+				$image = $this->get_gravatar($post['UserProfileDisplay']['gravatar_email'], array(
+					'width'	 => $options['width'],
+					'rating' => $post['UserProfileDisplay']['gravatar_rating'],
+					'img'	 => true,
+						), array(
+					'alt' => $options['alt'],
+						)
 				);
 				break;
 
@@ -222,13 +222,13 @@ class UserProfileDisplayHelper extends AppHelper
 	public function curlRequest($url, $options = array(), $header = array())
 	{
 		$_header = array();
-		$header = Hash::merge($_header, $header);
+		$header	 = Hash::merge($_header, $header);
 
-		$_options = array(
-			'timeout' => 2,
-			'return_transfer' => true,
+		$_options	 = array(
+			'timeout'			 => 2,
+			'return_transfer'	 => true,
 		);
-		$options = Hash::merge($_options, $options);
+		$options	 = Hash::merge($_options, $options);
 
 		// 初期化処理
 		$ch = curl_init();
@@ -296,14 +296,14 @@ class UserProfileDisplayHelper extends AppHelper
 	public function textToArray($str = '')
 	{
 		// "CR + LF: \r\n｜CR: \r｜LF: \n"
-		$code = array('\r\n', '\r');
+		$code	 = array('\r\n', '\r');
 		// 文頭文末の空白を削除する
-		$str = trim($str);
+		$str	 = trim($str);
 		// 改行コードを統一する（改行コードを変換する際はダブルクォーテーションで指定する）
 		//$str = str_replace($code, '\n', $str);
-		$str = preg_replace('/\r\n|\r|\n/', "\n", $str);
+		$str	 = preg_replace('/\r\n|\r|\n/', "\n", $str);
 		// 分割（結果は配列に入る）
-		$str = preg_split('/[\s,]+/', $str);
+		$str	 = preg_split('/[\s,]+/', $str);
 		//$str = explode('\n', $str);
 		return $str;
 	}
@@ -324,8 +324,8 @@ class UserProfileDisplayHelper extends AppHelper
 			'conditions' => array(
 				'UserProfileDisplay.status' => true,
 			),
-			'order' => 'position ASC',
-			'callbacks' => false,
+			'order'		 => 'position ASC',
+			'callbacks'	 => false,
 		));
 
 		if ($dataList) {
@@ -344,10 +344,11 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param string $name
 	 * @return array
 	 */
-	public function getAuthorInfo($name) {
+	public function getAuthorInfo($name)
+	{
 
-		$UserModel = ClassRegistry::init('User');
-		$userInfo = $UserModel->find('first', array(
+		$UserModel	 = ClassRegistry::init('User');
+		$userInfo	 = $UserModel->find('first', array(
 			'conditions' => array(
 				'User.name' => $name,
 			),
