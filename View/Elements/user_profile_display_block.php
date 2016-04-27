@@ -25,17 +25,17 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 		</div>
 		<div class="profile-txt">
 			<h4><?php echo h($this->UserProfileDisplay->getShowName($post)) ?></h4>
-			
-			<?php if ($post['UserProfileDisplay']['belong']): ?>
+
+			<?php if (Hash::get($post, 'UserProfileDisplay.belong')): ?>
 			<p><?php echo h($post['UserProfileDisplay']['belong']) ?></p>
 			<?php endif ?>
-			
-			<?php if ($post['UserProfileDisplay']['title']): ?>
+
+			<?php if (Hash::get($post, 'UserProfileDisplay.title')): ?>
 			<p><?php echo h($post['UserProfileDisplay']['title']) ?></p>
 			<?php endif ?>
 			
 			<ul>
-				<?php if ($post['UserProfileDisplay']['website']): ?>
+				<?php if (Hash::get($post, 'UserProfileDisplay.website')): ?>
 				<li>URL: 
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['website']),
@@ -44,7 +44,7 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 				</li>
 				<?php endif ?>
 				
-				<?php if ($post['UserProfileDisplay']['website2']): ?>
+				<?php if (Hash::get($post, 'UserProfileDisplay.website2')): ?>
 				<li>URL2: 
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['website2']),
@@ -53,7 +53,7 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 				</li>
 				<?php endif ?>
 
-				<?php if ($post['UserProfileDisplay']['website3']): ?>
+				<?php if (Hash::get($post, 'UserProfileDisplay.website3')): ?>
 				<li>URL3: 
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['website3']),
@@ -62,7 +62,7 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 				</li>
 				<?php endif ?>
 				
-				<?php if ($post['UserProfileDisplay']['twitter']): ?>
+				<?php if (Hash::get($post, 'UserProfileDisplay.twitter')): ?>
 				<li>Twitter: 
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['twitter']),
@@ -71,7 +71,7 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 				</li>
 				<?php endif ?>
 				
-				<?php if ($post['UserProfileDisplay']['facebook']): ?>
+				<?php if (Hash::get($post, 'UserProfileDisplay.facebook')): ?>
 				<li>facebook: 
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['facebook']),
@@ -80,7 +80,7 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 				</li>
 				<?php endif ?>
 				
-				<?php if ($post['UserProfileDisplay']['github']): ?>
+				<?php if (Hash::get($post, 'UserProfileDisplay.github')): ?>
 				<li>github: 
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['github']),
@@ -89,7 +89,7 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 				</li>
 				<?php endif ?>
 				
-				<?php if ($post['UserProfileDisplay']['google']): ?>
+				<?php if (Hash::get($post, 'UserProfileDisplay.google')): ?>
 				<li>Google＋: 
 					<?php $this->BcBaser->link(
 						$this->UserProfileDisplay->getLinkTitle($post['UserProfileDisplay']['google']),
@@ -99,13 +99,13 @@ if (!$this->UserProfileDisplay->allowPublish($post, 'UserProfileDisplay')) {
 				<?php endif ?>
 			</ul>
 		</div>
-		<?php if ($post['UserProfileDisplay']['description']): ?>
+		<?php if (Hash::get($post, 'UserProfileDisplay.description')): ?>
 		<div class="profile-description">
 			<?php echo $post['UserProfileDisplay']['description'] ?>
 		</div>
 		<?php endif ?>
 		
-		<?php if ($post['UserProfileDisplay']['show_blog_post']): ?>
+		<?php if (Hash::get($post, 'UserProfileDisplay.show_blog_post')): ?>
 			<?php $userBlogPosts = $this->UserProfileDisplay->getBlogPosts($post) ?>
 			<div class="profile-blog-post">
 				<h5>このひとの最新記事</h5>
