@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [HelperEventListener] UserProfileDisplay
  *
@@ -8,6 +9,7 @@
  */
 class UserProfileDisplayHelperEventListener extends BcHelperEventListener
 {
+
 	/**
 	 * 登録イベント
 	 *

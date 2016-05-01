@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Controller] UserProfileDisplay
  *
@@ -8,6 +9,7 @@
  */
 class UserProfileDisplayAppController extends BcPluginAppController
 {
+
 	/**
 	 * ヘルパー
 	 *
@@ -70,21 +72,21 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	public function admin_index()
 	{
 		$default = array('named' => array(
-			'num' => $this->siteConfigs['admin_list_num'],
-			'sortmode' => 0)
+				'num'		 => $this->siteConfigs['admin_list_num'],
+				'sortmode'	 => 0)
 		);
 		$this->setViewConditions($this->modelClass, array('default' => $default));
-		
-		$conditions = $this->_createAdminIndexConditions($this->request->data);
-		$this->paginate = array(
-			'conditions'	=> $conditions,
-			'fields'		=> array(),
+
+		$conditions		 = $this->_createAdminIndexConditions($this->request->data);
+		$this->paginate	 = array(
+			'conditions' => $conditions,
+			'fields'	 => array(),
 			//'order'	=> $this->modelClass .'.id DESC',
-			'limit'			=> $this->passedArgs['num']
+			'limit'		 => $this->passedArgs['num']
 		);
 		$this->set('datas', $this->paginate($this->modelClass));
-		
-		if($this->RequestHandler->isAjax() || !empty($this->request->query['ajax'])) {
+
+		if ($this->RequestHandler->isAjax() || !empty($this->request->query['ajax'])) {
 			Configure::write('debug', 0);
 			$this->render('ajax_index');
 			return;
@@ -100,7 +102,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 		if ($this->request->data) {
 			$this->{$this->modelClass}->create($this->request->data);
 			if ($this->{$this->modelClass}->save()) {
-				$message = $this->adminTitle .'「'.$this->request->data[$this->modelClass]['name'] .'」を追加しました。';
+				$message = $this->adminTitle . '「' . $this->request->data[$this->modelClass]['name'] . '」を追加しました。';
 				$this->setMessage($message, false, true);
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -110,7 +112,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 		} else {
 			$this->request->data = $this->{$this->modelClass}->getDefaultValue();
 		}
-		
+
 		$this->pageTitle = $this->adminTitle . '新規登録';
 		$this->render('form');
 	}
@@ -124,19 +126,19 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	{
 		if (!$id) {
 			$this->setMessage('無効な処理です。', true);
-			$this->redirect(array('action' => 'index'));			
+			$this->redirect(array('action' => 'index'));
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $this->{$this->modelClass}->getDefaultValue();
-			$this->{$this->modelClass}->id = $id;
-			$this->request->data = $this->{$this->modelClass}->read();
+			$this->request->data			 = $this->{$this->modelClass}->getDefaultValue();
+			$this->{$this->modelClass}->id	 = $id;
+			$this->request->data			 = $this->{$this->modelClass}->read();
 		} else {
 			$this->{$this->modelClass}->set($this->request->data);
 			if ($this->{$this->modelClass}->save($this->request->data)) {
-				
+
 				// メッセージ用にデータを取得
-				$data = $this->{$this->modelClass}->read(null, $id);
-				$message = $this->adminTitle .'「'. h($data[$this->modelClass]['name']) .'」を更新しました。';
+				$data	 = $this->{$this->modelClass}->read(null, $id);
+				$message = $this->adminTitle . '「' . h($data[$this->modelClass]['name']) . '」を更新しました。';
 				$this->setMessage($message, false, true);
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -197,7 +199,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 		$data = $this->{$this->modelClass}->read(null, $id);
 		// 削除実行
 		if ($this->{$this->modelClass}->delete($id)) {
-			$message = $this->adminTitle .'のID: '. $data[$this->modelClass]['id'] .' を削除しました。';
+			$message = $this->adminTitle . 'のID: ' . $data[$this->modelClass]['id'] . ' を削除しました。';
 			$this->{$this->modelClass}->saveDbLog($message);
 			return true;
 		} else {
@@ -218,8 +220,8 @@ class UserProfileDisplayAppController extends BcPluginAppController
 		}
 		if ($this->_changeStatus($id, false)) {
 			// メッセージ用にデータを取得
-			$data = $this->{$this->modelClass}->read(null, $id);
-			$message = $this->adminTitle .'のID: '. $data[$this->modelClass]['id'] .' を「無効」状態に変更しました。';
+			$data	 = $this->{$this->modelClass}->read(null, $id);
+			$message = $this->adminTitle . 'のID: ' . $data[$this->modelClass]['id'] . ' を「無効」状態に変更しました。';
 			$this->setMessage($message);
 			$this->redirect(array('action' => 'index'));
 		}
@@ -240,8 +242,8 @@ class UserProfileDisplayAppController extends BcPluginAppController
 		}
 		if ($this->_changeStatus($id, true)) {
 			// メッセージ用にデータを取得
-			$data = $this->{$this->modelClass}->read(null, $id);
-			$message = $this->adminTitle .'のID: '. $data[$this->modelClass]['id'] .' を「有効」状態に変更しました。';
+			$data	 = $this->{$this->modelClass}->read(null, $id);
+			$message = $this->adminTitle . 'のID: ' . $data[$this->modelClass]['id'] . ' を「有効」状態に変更しました。';
 			$this->setMessage($message);
 			$this->redirect(array('action' => 'index'));
 		}
@@ -296,11 +298,11 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 */
 	protected function _changeStatus($id, $status)
 	{
-		$data = $this->{$this->modelClass}->find('first', array(
+		$data								 = $this->{$this->modelClass}->find('first', array(
 			'conditions' => array('id' => $id),
-			'recursive' => -1
+			'recursive'	 => -1
 		));
-		$data[$this->modelClass]['status'] = $status;
+		$data[$this->modelClass]['status']	 = $status;
 		if ($status) {
 			$data[$this->modelClass]['status'] = true;
 		} else {
@@ -335,7 +337,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 			$this->ajaxError(500, $this->{$this->modelClass}->validationErrors);
 		}
 		if (in_array($this->modelClass, $this->sortModelName)) {
-			if(!isset($this->passedArgs['sortmode'])) {
+			if (!isset($this->passedArgs['sortmode'])) {
 				$this->passedArgs['sortmode'] = false;
 			}
 			$this->set('sortmode', $this->passedArgs['sortmode']);
@@ -347,7 +349,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 *
 	 * @return boolean
 	 */
-	public function admin_ajax_update_sort ()
+	public function admin_ajax_update_sort()
 	{
 		if ($this->request->data) {
 			$this->setViewConditions($this->modelClass, array('action' => 'admin_index'));
@@ -372,16 +374,16 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 */
 	public function admin_move_up($id)
 	{
-		$this->pageTitle = $this->adminTitle .'並び順繰り上げ';
-		
+		$this->pageTitle = $this->adminTitle . '並び順繰り上げ';
+
 		if (!$id) {
 			$this->setMessage('無効なIDです。', true);
 			$this->redirect(array('action' => 'index'));
 		}
-		
+
 		if ($this->{$this->modelClass}->Behaviors->enabled('List')) {
 			if ($this->{$this->modelClass}->moveUp($id)) {
-				$message = $this->pageTitle .'ました。';
+				$message = $this->pageTitle . 'ました。';
 				$this->setMessage($message, false, false);
 				clearAllCache();
 				$this->redirect(array('action' => 'index'));
@@ -402,16 +404,16 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 */
 	public function admin_move_down($id)
 	{
-		$this->pageTitle = $this->adminTitle .'並び順を繰り下げ';
-		
+		$this->pageTitle = $this->adminTitle . '並び順を繰り下げ';
+
 		if (!$id) {
 			$this->setMessage('無効なIDです。', true);
 			$this->redirect(array('action' => 'index'));
 		}
-		
+
 		if ($this->{$this->modelClass}->Behaviors->enabled('List')) {
 			if ($this->{$this->modelClass}->moveDown($id)) {
-				$message = $this->pageTitle .'ました。';
+				$message = $this->pageTitle . 'ました。';
 				$this->setMessage($message, false, false);
 				clearAllCache();
 				$this->redirect(array('action' => 'index'));
@@ -433,7 +435,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	{
 		if ($this->{$this->modelClass}->Behaviors->enabled('Tree')) {
 			if ($this->{$this->modelClass}->recover()) {
-				$message = $this->modelClass .'データに lft,rght を割り振りました。';
+				$message = $this->modelClass . 'データに lft,rght を割り振りました。';
 				$this->setMessage($message, false, true);
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -455,7 +457,7 @@ class UserProfileDisplayAppController extends BcPluginAppController
 		if ($this->{$this->modelClass}->Behaviors->enabled('List')) {
 			if ($this->{$this->modelClass}->fixListOrder()) {
 				clearAllCache();
-				$message = $this->modelClass .'データに並び順（position）を割り振りました。';
+				$message = $this->modelClass . 'データに並び順（position）を割り振りました。';
 				$this->setMessage($message, false, true);
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -471,8 +473,9 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 * 一覧の表示用データをセットする
 	 * 
 	 */
-	protected function _setAdminIndexViewData() {
-		$user = $this->BcAuth->user();
+	protected function _setAdminIndexViewData()
+	{
+		$user		 = $this->BcAuth->user();
 		$allowOwners = array();
 		if (!empty($user)) {
 			$allowOwners = array('', $user['user_group_id']);
@@ -490,16 +493,16 @@ class UserProfileDisplayAppController extends BcPluginAppController
 	 */
 	public function admin_download_csv()
 	{
-		$default = array();
+		$default	 = array();
 		// レコード抽出条件
 		$this->setViewConditions($this->modelClass, array(
-			'default' => $default,
-			'action' => 'admin_index',
+			'default'	 => $default,
+			'action'	 => 'admin_index',
 		));
-		$conditions = $this->_createAdminIndexConditions($this->request->data);
-		$datas = $this->{$this->modelClass}->find('all', array(
+		$conditions	 = $this->_createAdminIndexConditions($this->request->data);
+		$datas		 = $this->{$this->modelClass}->find('all', array(
 			'conditions' => $conditions,
-			'recursive' => -1
+			'recursive'	 => -1
 		));
 		$this->set('datas', $datas);
 		$this->set('csvFileName', Inflector::underscore($this->modelClass));

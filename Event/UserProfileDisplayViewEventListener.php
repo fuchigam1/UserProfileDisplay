@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [ViewEventListener] UserProfileDisplay
  *
@@ -8,6 +9,7 @@
  */
 class UserProfileDisplayViewEventListener extends BcViewEventListener
 {
+
 	/**
 	 * 登録イベント
 	 *

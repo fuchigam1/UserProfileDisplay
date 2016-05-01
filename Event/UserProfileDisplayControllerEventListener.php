@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [ControllerEventListener] UserProfileDisplay
  *
@@ -8,6 +9,7 @@
  */
 class UserProfileDisplayControllerEventListener extends BcControllerEventListener
 {
+
 	/**
 	 * 登録イベント
 	 *
@@ -33,8 +35,8 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
 	 */
 	public function initialize(CakeEvent $event)
 	{
-		$Controller	= $event->subject();
-		$Controller->helpers[] = 'UserProfileDisplay.UserProfileDisplay';
+		$Controller				 = $event->subject();
+		$Controller->helpers[]	 = 'UserProfileDisplay.UserProfileDisplay';
 	}
 
 	/**
@@ -56,16 +58,16 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
 
 		if ($Controller->request->params['action'] == 'admin_add') {
 			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
-			$UserProfileDisplayModel = new UserProfileDisplay();
-			$default = $UserProfileDisplayModel->getDefaultValue();
+			$UserProfileDisplayModel						 = new UserProfileDisplay();
+			$default										 = $UserProfileDisplayModel->getDefaultValue();
 			$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
 			return;
 		}
 
 		if (isset($Controller->request->data['UserProfileDisplay']) && empty($Controller->request->data['UserProfileDisplay'])) {
 			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
-			$UserProfileDisplayModel = new UserProfileDisplay();
-			$default = $UserProfileDisplayModel->getDefaultValue();
+			$UserProfileDisplayModel						 = new UserProfileDisplay();
+			$default										 = $UserProfileDisplayModel->getDefaultValue();
 			$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
 		}
 	}

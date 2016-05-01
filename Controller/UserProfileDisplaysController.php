@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Controller] UserProfileDisplay
  *
@@ -7,8 +8,10 @@
  * @license			MIT
  */
 App::uses('UserProfileDisplayApp', 'UserProfileDisplay.Controller');
+
 class UserProfileDisplaysController extends UserProfileDisplayAppController
 {
+
 	/**
 	 * ControllerName
 	 * 
@@ -36,7 +39,8 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 	 * beforeFilter
 	 *
 	 */
-	public function beforeFilter() {
+	public function beforeFilter()
+	{
 		parent::beforeFilter();
 	}
 
@@ -47,28 +51,28 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 	public function admin_index()
 	{
 		$default = array('named' => array(
-			'num' => $this->siteConfigs['admin_list_num'],
-			'sortmode' => 0)
+				'num'		 => $this->siteConfigs['admin_list_num'],
+				'sortmode'	 => 0)
 		);
 		$this->setViewConditions($this->modelClass, array('default' => $default));
 
-		$conditions = $this->_createAdminIndexConditions($this->request->data);
-		$this->paginate = array(
-			'conditions'	=> $conditions,
-			'fields'		=> array(),
-			'order'	=> $this->modelClass .'.position ASC',
-			'limit'			=> $this->passedArgs['num']
+		$conditions		 = $this->_createAdminIndexConditions($this->request->data);
+		$this->paginate	 = array(
+			'conditions' => $conditions,
+			'fields'	 => array(),
+			'order'		 => $this->modelClass . '.position ASC',
+			'limit'		 => $this->passedArgs['num']
 		);
 		$this->set('datas', $this->paginate($this->modelClass));
 
-		if($this->RequestHandler->isAjax() || !empty($this->request->query['ajax'])) {
+		if ($this->RequestHandler->isAjax() || !empty($this->request->query['ajax'])) {
 			Configure::write('debug', 0);
 			$this->render('ajax_index');
 			return;
 		}
 
-		$this->pageTitle = $this->adminTitle .'一覧';
-		$this->search = 'user_profile_displays_index';
+		$this->pageTitle = $this->adminTitle . '一覧';
+		$this->search	 = 'user_profile_displays_index';
 	}
 
 	/**
@@ -77,22 +81,23 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 	 * @param array $data
 	 * @return array $conditions
 	 */
-	protected function _createAdminIndexConditions($data) {
-		$conditions = array();
-		$name = '';
+	protected function _createAdminIndexConditions($data)
+	{
+		$conditions	 = array();
+		$name		 = '';
 
 		if (isset($data['UserProfileDisplay']['name'])) {
 			$name = $data['UserProfileDisplay']['name'];
 		}
-		
+
 		unset($data['_Token']);
 		unset($data['UserProfileDisplay']['name']);
 
 		unset($data['UserProfileDisplay']['num']);
 		unset($data['UserProfileDisplay']['page']);
-		
+
 		// 条件指定のないフィールドを解除
-		foreach($data['UserProfileDisplay'] as $key => $value) {
+		foreach ($data['UserProfileDisplay'] as $key => $value) {
 			if ($value === '') {
 				unset($data['UserProfileDisplay'][$key]);
 			}
@@ -105,11 +110,11 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 		if ($name) {
 			$conditions[] = array(
 				'OR' => array(
-					array('UserProfileDisplay' .'.name LIKE' => '%'.$name.'%'),
+					array('UserProfileDisplay' . '.name LIKE' => '%' . $name . '%'),
 				),
 			);
 		}
-		
+
 		if ($conditions) {
 			return $conditions;
 		} else {

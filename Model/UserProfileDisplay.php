@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [Model] UserProfileDisplay
  *
@@ -8,6 +9,7 @@
  */
 class UserProfileDisplay extends BcPluginAppModel
 {
+
 	/**
 	 * ModelName
 	 * 
@@ -31,18 +33,18 @@ class UserProfileDisplay extends BcPluginAppModel
 		'BcCache',
 		'UserProfileDisplay.List',
 		'BcUpload' => array(
-			'saveDir' => 'user_profile_display',
-			'fields' => array(
+			'saveDir'	 => 'user_profile_display',
+			'fields'	 => array(
 				'file' => array(
-					'type' => 'image',
-					'namefield' => 'id',
+					'type'		 => 'image',
+					'namefield'	 => 'id',
 					'nameformat' => '%04d',
 					//'imageresize' => array('prefix' => 'resize', 'width' => '300', 'height' => '300'),
-					'imagecopy' => array(
-						'small'		=> array('suffix' => '_small', 'width' => '100', 'height' => '100'),
-						'thumb'		=> array('suffix' => '_thumb', 'width' => '150', 'height' => '150'),
-						'medium'	=> array('suffix' => '_medium', 'width' => '200', 'height' => '200'),
-						'large'		=> array('suffix' => '_large', 'width' => '300', 'height' => '300'),
+					'imagecopy'	 => array(
+						'small'	 => array('suffix' => '_small', 'width' => '100', 'height' => '100'),
+						'thumb'	 => array('suffix' => '_thumb', 'width' => '150', 'height' => '150'),
+						'medium' => array('suffix' => '_medium', 'width' => '200', 'height' => '200'),
+						'large'	 => array('suffix' => '_large', 'width' => '300', 'height' => '300'),
 					),
 				),
 			),
@@ -56,7 +58,7 @@ class UserProfileDisplay extends BcPluginAppModel
 	 */
 	public $belongsTo = array(
 		'User' => array(
-			'className'	=> 'User',
+			'className'	 => 'User',
 			'foreignKey' => 'user_id'
 		),
 	);
@@ -66,13 +68,14 @@ class UserProfileDisplay extends BcPluginAppModel
 	 *
 	 * @return array
 	 */
-	public function getDefaultValue() {
+	public function getDefaultValue()
+	{
 		$data = array(
 			$this->name => array(
-				'status' => true,
-				'show_blog_post' => true,
-				'show_post_num' => '5',
-				'gravatar_rating' => '0',
+				'status'			 => true,
+				'show_blog_post'	 => true,
+				'show_post_num'		 => '5',
+				'gravatar_rating'	 => '0',
 			)
 		);
 		return $data;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * [ModelEventListener] UserProfileDisplay
  *
@@ -8,6 +9,7 @@
  */
 class UserProfileDisplayModelEventListener extends BcModelEventListener
 {
+
 	/**
 	 * 登録イベント
 	 *
@@ -76,10 +78,10 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 	 */
 	public function userBeforeFind(CakeEvent $event)
 	{
-		$Model = $event->subject();
+		$Model		 = $event->subject();
 		$association = array(
 			'UserProfileDisplay' => array(
-				'className' => 'UserProfileDisplay.UserProfileDisplay',
+				'className'	 => 'UserProfileDisplay.UserProfileDisplay',
 				'foreignKey' => 'user_id'
 			)
 		);
@@ -100,17 +102,17 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 			return;
 		}
 
-		$saveData['UserProfileDisplay'] = $Model->data['UserProfileDisplay'];
-		$saveData['UserProfileDisplay']['user_id'] = $Model->id;
+		$saveData['UserProfileDisplay']				 = $Model->data['UserProfileDisplay'];
+		$saveData['UserProfileDisplay']['user_id']	 = $Model->id;
 
 		$data = $Model->UserProfileDisplay->find('first', array(
 			'conditions' => array('UserProfileDisplay.user_id' => $Model->id),
-			'recursive' => -1,
-			'callbacks' => false,
+			'recursive'	 => -1,
+			'callbacks'	 => false,
 		));
 		if (!$data) {
-			$max = $Model->UserProfileDisplay->getMax('position');
-			$data['UserProfileDisplay']['position'] = $max + 1;
+			$max									 = $Model->UserProfileDisplay->getMax('position');
+			$data['UserProfileDisplay']['position']	 = $max + 1;
 		}
 
 		if (!$Model->UserProfileDisplay->save($saveData)) {
@@ -128,10 +130,10 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 	 */
 	public function userAfterDelete(CakeEvent $event)
 	{
-		$Model = $event->subject();
-		$data = $Model->UserProfileDisplay->find('first', array(
+		$Model	 = $event->subject();
+		$data	 = $Model->UserProfileDisplay->find('first', array(
 			'conditions' => array('UserProfileDisplay.user_id' => $Model->id),
-			'recursive' => -1
+			'recursive'	 => -1
 		));
 		if ($data) {
 			if (!$Model->UserProfileDisplay->delete($data['UserProfileDisplay']['id'])) {
