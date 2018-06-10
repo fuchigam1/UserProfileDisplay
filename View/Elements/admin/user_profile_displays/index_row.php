@@ -10,26 +10,26 @@ $classies = array();
 ?>
 <tr>
 	<td class="row-tools">
-	<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_edit.png', array('width' => 24, 'height' => 24, 'alt' => '編集', 'class' => 'btn')),
+	<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_edit.png', array('alt' => '編集', 'class' => 'btn')),
 			array('plugin' => null, 'controller' => 'users', 'action' => 'edit',
 					$data['User']['id']), array('title' => '編集')) ?>
 
-	<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_delete.png', array('width' => 24, 'height' => 24, 'alt' => '削除', 'class' => 'btn')),
+	<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_delete.png', array('alt' => '削除', 'class' => 'btn')),
 			array('action' => 'ajax_delete', $data['UserProfileDisplay']['id']), array('title' => '削除', 'class' => 'btn-delete')) ?>
 
 		<?php if ($count != 1 || !isset($datas)): ?>
-			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_up.png', array('width' => 24, 'height' => 24, 'alt' => '上へ移動', 'class' => 'btn')),
+			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_up.png', array('alt' => '上へ移動', 'class' => 'btn')),
 					array('controller' => 'user_profile_displays', 'action' => 'move_up', $data['UserProfileDisplay']['id']), array('class' => 'btn-up', 'title' => '上へ移動')) ?>
 		<?php else: ?>
-			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_up.png', array('width' => 24, 'height' => 24, 'alt' => '上へ移動', 'class' => 'btn')),
+			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_up.png', array('alt' => '上へ移動', 'class' => 'btn')),
 					array('controller' => 'user_profile_displays', 'action' => 'move_up', $data['UserProfileDisplay']['id']), array('class' => 'btn-up', 'title' => '上へ移動', 'style' => 'display:none')) ?>
 		<?php endif ?>
 		
 		<?php if (!isset($datas) || count($datas) != $count): ?>
-			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_down.png', array('width' => 24, 'height' => 24, 'alt' => '下へ移動', 'class' => 'btn')),
+			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_down.png', array('alt' => '下へ移動', 'class' => 'btn')),
 					array('controller' => 'user_profile_displays', 'action' => 'move_down', $data['UserProfileDisplay']['id']), array('class' => 'btn-down', 'title' => '下へ移動')) ?>
 		<?php else: ?>
-			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_down.png', array('width' => 24, 'height' => 24, 'alt' => '下へ移動', 'class' => 'btn')),
+			<?php $this->BcBaser->link($this->BcBaser->getImg('admin/icn_tool_down.png', array('alt' => '下へ移動', 'class' => 'btn')),
 					array('controller' => 'user_profile_displays', 'action' => 'move_down', $data['UserProfileDisplay']['id']), array('class' => 'btn-down', 'title' => '下へ移動', 'style' => 'display:none')) ?>
 		<?php endif ?>
 	</td>

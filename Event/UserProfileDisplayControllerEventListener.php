@@ -7,8 +7,7 @@
  * @author			arata
  * @license			MIT
  */
-class UserProfileDisplayControllerEventListener extends BcControllerEventListener
-{
+class UserProfileDisplayControllerEventListener extends BcControllerEventListener {
 
 	/**
 	 * 登録イベント
@@ -21,20 +20,12 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
 	);
 
 	/**
-	 * 処理対象とするアクション
-	 * 
-	 * @var array
-	 */
-	private $targetAction = array('admin_edit', 'admin_add');
-
-	/**
 	 * initialize
 	 * UserProfileDisplayヘルパーを追加する
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function initialize(CakeEvent $event)
-	{
+	public function initialize(CakeEvent $event) {
 		$Controller				 = $event->subject();
 		$Controller->helpers[]	 = 'UserProfileDisplay.UserProfileDisplay';
 	}
@@ -45,31 +36,30 @@ class UserProfileDisplayControllerEventListener extends BcControllerEventListene
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function usersBeforeRender(CakeEvent $event)
-	{
+	public function usersBeforeRender(CakeEvent $event) {
 		if (!BcUtil::isAdminSystem()) {
 			return;
 		}
 
 		$Controller = $event->subject();
-		if (!in_array($Controller->request->params['action'], $this->targetAction)) {
-			return;
+		if (in_array($Controller->request->params['action'], array('admin_edit', 'admin_add'))) {
+			if ($Controller->request->params['action'] === 'admin_add') {
+				App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
+				$UserProfileDisplayModel						 = new UserProfileDisplay();
+				$default										 = $UserProfileDisplayModel->getDefaultValue();
+				$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
+				return;
+			}
+
+			if (empty($Controller->request->data['UserProfileDisplay']['id'])) {
+				App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
+				$UserProfileDisplayModel						 = new UserProfileDisplay();
+				$default										 = $UserProfileDisplayModel->getDefaultValue();
+				$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
+			}
 		}
 
-		if ($Controller->request->params['action'] == 'admin_add') {
-			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
-			$UserProfileDisplayModel						 = new UserProfileDisplay();
-			$default										 = $UserProfileDisplayModel->getDefaultValue();
-			$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
-			return;
-		}
-
-		if (isset($Controller->request->data['UserProfileDisplay']) && empty($Controller->request->data['UserProfileDisplay'])) {
-			App::uses('UserProfileDisplay', 'UserProfileDisplay.Model');
-			$UserProfileDisplayModel						 = new UserProfileDisplay();
-			$default										 = $UserProfileDisplayModel->getDefaultValue();
-			$Controller->request->data['UserProfileDisplay'] = $default['UserProfileDisplay'];
-		}
+		return;
 	}
 
 }

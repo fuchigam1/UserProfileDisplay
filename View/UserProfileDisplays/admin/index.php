@@ -7,10 +7,10 @@
  * @license			MIT
  */
 $this->BcBaser->js(array(
-	'admin/jquery.baser_ajax_data_list', 
-	'admin/jquery.baser_ajax_batch', 
-	'admin/baser_ajax_data_list_config',
-	'admin/baser_ajax_batch_config'
+	'admin/libs/jquery.baser_ajax_data_list',
+	'admin/libs/baser_ajax_data_list_config',
+	'admin/libs/jquery.baser_ajax_batch',
+	'admin/libs/baser_ajax_batch_config',
 ));
 ?>
 <script type="text/javascript">

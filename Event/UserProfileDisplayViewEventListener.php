@@ -7,8 +7,7 @@
  * @author			arata
  * @license			MIT
  */
-class UserProfileDisplayViewEventListener extends BcViewEventListener
-{
+class UserProfileDisplayViewEventListener extends BcViewEventListener {
 
 	/**
 	 * 登録イベント
@@ -25,18 +24,17 @@ class UserProfileDisplayViewEventListener extends BcViewEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function usersAfterElement(CakeEvent $event)
-	{
+	public function usersAfterElement(CakeEvent $event) {
 		if (!BcUtil::isAdminSystem()) {
 			return;
 		}
 
 		$View = $event->subject();
-		if ($event->data['name'] != 'submenus/user_groups') {
-			return;
+		if ($event->data['name'] === 'submenus/users') {
+			$event->data['out'] = $event->data['out'] . $View->element('UserProfileDisplay.submenus/user_profile_display_sort');
 		}
 
-		$event->data['out'] = $event->data['out'] . $View->element('UserProfileDisplay.submenus/user_profile_display_sort');
+		return;
 	}
 
 }

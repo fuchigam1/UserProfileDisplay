@@ -1,10 +1,9 @@
 <?php
-
 /**
  * UserProfileDisplay プラグイン用
  * データベース初期化
  */
-$this->Plugin->initDb('plugin', 'UserProfileDisplay');
+$this->Plugin->initDb('UserProfileDisplay');
 /**
  * 必要フォルダ初期化
  * 

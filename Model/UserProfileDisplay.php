@@ -7,9 +7,8 @@
  * @author			arata
  * @license			MIT
  */
-class UserProfileDisplay extends BcPluginAppModel
+class UserProfileDisplay extends AppModel
 {
-
 	/**
 	 * ModelName
 	 * 
@@ -30,7 +29,6 @@ class UserProfileDisplay extends BcPluginAppModel
 	 * @var array
 	 */
 	public $actsAs = array(
-		'BcCache',
 		'UserProfileDisplay.List',
 		'BcUpload' => array(
 			'saveDir'	 => 'user_profile_display',
@@ -68,8 +66,7 @@ class UserProfileDisplay extends BcPluginAppModel
 	 *
 	 * @return array
 	 */
-	public function getDefaultValue()
-	{
+	public function getDefaultValue() {
 		$data = array(
 			$this->name => array(
 				'status'			 => true,

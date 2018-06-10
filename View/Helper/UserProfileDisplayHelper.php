@@ -7,8 +7,7 @@
  * @author			arata
  * @license			MIT
  */
-class UserProfileDisplayHelper extends AppHelper
-{
+class UserProfileDisplayHelper extends AppHelper {
 
 	/**
 	 * ヘルパー
@@ -24,8 +23,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param string $modelName
 	 * @return boolean 有効状態
 	 */
-	public function allowPublish($data, $modelName = '')
-	{
+	public function allowPublish($data, $modelName = '') {
 		if ($modelName) {
 			$data = $data[$modelName];
 		}
@@ -40,8 +38,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param array $options
 	 * @return string
 	 */
-	public function getShowName($post = array(), $options = array())
-	{
+	public function getShowName($post = array(), $options = array()) {
 		$_options	 = array(
 			'delimiter' => ' ',
 		);
@@ -88,13 +85,8 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param array $options
 	 * @return array
 	 */
-	public function getBlogPosts($post, $options = array())
-	{
-		if (ClassRegistry::isKeySet('Blog.BlogPost')) {
-			$BlogPostModel = ClassRegistry::getObject('Blog.BlogPost');
-		} else {
-			$BlogPostModel = ClassRegistry::init('Blog.BlogPost');
-		}
+	public function getBlogPosts($post, $options = array()) {
+		$BlogPostModel = ClassRegistry::init('Blog.BlogPost');
 
 		$_options	 = array(
 			'user_id'			 => $post['BlogPost']['user_id'],
@@ -127,8 +119,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param array $options
 	 * @return string
 	 */
-	public function getShowImage($post = array(), $options = array())
-	{
+	public function getShowImage($post = array(), $options = array()) {
 		$_options	 = array(
 			'width'		 => $post['UserProfileDisplay']['gravatar_size'],
 			'alt'		 => $this->getShowName($post),
@@ -152,9 +143,9 @@ class UserProfileDisplayHelper extends AppHelper
 					'width'	 => $options['width'],
 					'rating' => $post['UserProfileDisplay']['gravatar_rating'],
 					'img'	 => true,
-						), array(
+					), array(
 					'alt' => $options['alt'],
-						)
+					)
 				);
 				break;
 
@@ -177,8 +168,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @return String containing either just a URL or a complete image tag
 	 * @source http://gravatar.com/site/implement/images/php/
 	 */
-	public function get_gravatar($email, $options = array(), $attr = array())
-	{
+	public function get_gravatar($email, $options = array(), $attr = array()) {
 		$_options	 = array(
 			'width'	 => 80,
 			'avatar' => 'mm',
@@ -219,8 +209,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @link http://so-zou.jp/web-app/tech/programming/php/network/curl/#no1
 	 * @link http://qiita.com/Shadow/items/a5f9574fadd214d7b5c8
 	 */
-	public function curlRequest($url, $options = array(), $header = array())
-	{
+	public function curlRequest($url, $options = array(), $header = array()) {
 		$_header = array();
 		$header	 = Hash::merge($_header, $header);
 
@@ -262,8 +251,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param string $str
 	 * @return string
 	 */
-	public function getLinkTitle($str = '')
-	{
+	public function getLinkTitle($str = '') {
 		$array = $this->textToArray($str);
 		if (!empty($array[0])) {
 			return $array[0];
@@ -277,8 +265,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param string $str
 	 * @return string
 	 */
-	public function getLinkUrl($str = '')
-	{
+	public function getLinkUrl($str = '') {
 		$array = $this->textToArray($str);
 		if (!empty($array[1])) {
 			return $array[1];
@@ -293,8 +280,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param string $str
 	 * @return mixed
 	 */
-	public function textToArray($str = '')
-	{
+	public function textToArray($str = '') {
 		// "CR + LF: \r\n｜CR: \r｜LF: \n"
 		$code	 = array('\r\n', '\r');
 		// 文頭文末の空白を削除する
@@ -313,13 +299,9 @@ class UserProfileDisplayHelper extends AppHelper
 	 * 
 	 * @return array
 	 */
-	public function getProfileList()
-	{
-		if (ClassRegistry::isKeySet('UserProfileDisplay.UserProfileDisplay')) {
-			$UserProfileDisplayModel = ClassRegistry::getObject('UserProfileDisplay.UserProfileDisplay');
-		} else {
-			$UserProfileDisplayModel = ClassRegistry::init('UserProfileDisplay.UserProfileDisplay');
-		}
+	public function getProfileList() {
+		$UserProfileDisplayModel = ClassRegistry::init('UserProfileDisplay.UserProfileDisplay');
+
 		$dataList = $UserProfileDisplayModel->find('all', array(
 			'conditions' => array(
 				'UserProfileDisplay.status' => true,
@@ -344,9 +326,7 @@ class UserProfileDisplayHelper extends AppHelper
 	 * @param string $name
 	 * @return array
 	 */
-	public function getAuthorInfo($name)
-	{
-
+	public function getAuthorInfo($name) {
 		$UserModel	 = ClassRegistry::init('User');
 		$userInfo	 = $UserModel->find('first', array(
 			'conditions' => array(

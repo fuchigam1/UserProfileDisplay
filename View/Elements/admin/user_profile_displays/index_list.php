@@ -6,6 +6,7 @@
  * @author			arata
  * @license			MIT
  */
+$this->BcListTable->setColumnNumber(5);
 ?>
 <?php $this->BcBaser->element('pagination') ?>
 
@@ -47,7 +48,7 @@
 	<?php endforeach; ?>
 <?php else: ?>
 	<tr>
-		<td colspan="5"><p class="no-data">データがありません。</p></td>
+		<td colspan="<?php echo $this->BcListTable->getColumnNumber() ?>"><p class="no-data">データがありません。</p></td>
 	</tr>
 <?php endif; ?>
 	</tbody>

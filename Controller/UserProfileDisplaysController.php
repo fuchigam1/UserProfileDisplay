@@ -1,5 +1,4 @@
 <?php
-
 /**
  * [Controller] UserProfileDisplay
  *
@@ -9,8 +8,7 @@
  */
 App::uses('UserProfileDisplayApp', 'UserProfileDisplay.Controller');
 
-class UserProfileDisplaysController extends UserProfileDisplayAppController
-{
+class UserProfileDisplaysController extends UserProfileDisplayAppController {
 
 	/**
 	 * ControllerName
@@ -39,8 +37,7 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 	 * beforeFilter
 	 *
 	 */
-	public function beforeFilter()
-	{
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
@@ -48,8 +45,7 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 	 * [ADMIN] 一覧表示
 	 * 
 	 */
-	public function admin_index()
-	{
+	public function admin_index() {
 		$default = array('named' => array(
 				'num'		 => $this->siteConfigs['admin_list_num'],
 				'sortmode'	 => 0)
@@ -81,45 +77,21 @@ class UserProfileDisplaysController extends UserProfileDisplayAppController
 	 * @param array $data
 	 * @return array $conditions
 	 */
-	protected function _createAdminIndexConditions($data)
-	{
+	protected function _createAdminIndexConditions($data) {
 		$conditions	 = array();
 		$name		 = '';
+
+		unset($data['_Token']);
 
 		if (isset($data['UserProfileDisplay']['name'])) {
 			$name = $data['UserProfileDisplay']['name'];
 		}
 
-		unset($data['_Token']);
-		unset($data['UserProfileDisplay']['name']);
-
-		unset($data['UserProfileDisplay']['num']);
-		unset($data['UserProfileDisplay']['page']);
-
-		// 条件指定のないフィールドを解除
-		foreach ($data['UserProfileDisplay'] as $key => $value) {
-			if ($value === '') {
-				unset($data['UserProfileDisplay'][$key]);
-			}
-		}
-		if ($data['UserProfileDisplay']) {
-			$conditions = $this->postConditions($data);
-		}
-
-		// １つの入力指定から複数フィールド検索指定
 		if ($name) {
-			$conditions[] = array(
-				'OR' => array(
-					array('UserProfileDisplay' . '.name LIKE' => '%' . $name . '%'),
-				),
-			);
+			$conditions['UserProfileDisplay.name LIKE'] = '%' . $name . '%';
 		}
 
-		if ($conditions) {
-			return $conditions;
-		} else {
-			return array();
-		}
+		return $conditions;
 	}
 
 }

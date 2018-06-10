@@ -7,8 +7,7 @@
  * @author			arata
  * @license			MIT
  */
-class UserProfileDisplayHelperEventListener extends BcHelperEventListener
-{
+class UserProfileDisplayHelperEventListener extends BcHelperEventListener {
 
 	/**
 	 * 登録イベント
@@ -40,8 +39,7 @@ class UserProfileDisplayHelperEventListener extends BcHelperEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function formBeforeCreate(CakeEvent $event)
-	{
+	public function formBeforeCreate(CakeEvent $event) {
 		if (!BcUtil::isAdminSystem()) {
 			return;
 		}
@@ -66,8 +64,7 @@ class UserProfileDisplayHelperEventListener extends BcHelperEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function formAfterForm(CakeEvent $event)
-	{
+	public function formAfterForm(CakeEvent $event) {
 		if (!BcUtil::isAdminSystem()) {
 			return;
 		}

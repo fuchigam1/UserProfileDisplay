@@ -7,8 +7,7 @@
  * @author			arata
  * @license			MIT
  */
-class UserProfileDisplayModelEventListener extends BcModelEventListener
-{
+class UserProfileDisplayModelEventListener extends BcModelEventListener {
 
 	/**
 	 * 登録イベント
@@ -27,13 +26,8 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 	 * 
 	 * @return void
 	 */
-	private function setupModel()
-	{
-		if (ClassRegistry::isKeySet('UserProfileDisplay.UserProfileDisplay')) {
-			$this->UserProfileDisplayModel = ClassRegistry::getObject('UserProfileDisplay.UserProfileDisplay');
-		} else {
-			$this->UserProfileDisplayModel = ClassRegistry::init('UserProfileDisplay.UserProfileDisplay');
-		}
+	private function setupModel() {
+		$this->UserProfileDisplayModel = ClassRegistry::init('UserProfileDisplay.UserProfileDisplay');
 	}
 
 	/**
@@ -42,8 +36,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function blogBlogPostAfterFind(CakeEvent $event)
-	{
+	public function blogBlogPostAfterFind(CakeEvent $event) {
 		//$Model = $event->subject();
 		if (BcUtil::isAdminSystem()) {
 			return;
@@ -76,8 +69,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function userBeforeFind(CakeEvent $event)
-	{
+	public function userBeforeFind(CakeEvent $event) {
 		$Model		 = $event->subject();
 		$association = array(
 			'UserProfileDisplay' => array(
@@ -94,8 +86,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function userAfterSave(CakeEvent $event)
-	{
+	public function userAfterSave(CakeEvent $event) {
 		$Model = $event->subject();
 
 		if (!isset($Model->data['UserProfileDisplay']) || empty($Model->data['UserProfileDisplay'])) {
@@ -128,8 +119,7 @@ class UserProfileDisplayModelEventListener extends BcModelEventListener
 	 * 
 	 * @param CakeEvent $event
 	 */
-	public function userAfterDelete(CakeEvent $event)
-	{
+	public function userAfterDelete(CakeEvent $event) {
 		$Model	 = $event->subject();
 		$data	 = $Model->UserProfileDisplay->find('first', array(
 			'conditions' => array('UserProfileDisplay.user_id' => $Model->id),
